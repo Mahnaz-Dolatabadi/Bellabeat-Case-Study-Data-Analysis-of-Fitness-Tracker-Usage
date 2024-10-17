@@ -1,0 +1,143 @@
+Upload CSV files to R
+daily_activity <- read.csv("dailyActivity_merged.csv")
+sleep_day <- read.csv("sleepDay_merged.csv")
+install.packages('tidyverse')
+library(tidyverse)
+head(daily_activity)
+colnames(daily_activity)
+head(sleep_day)
+colnames(sleep_day)
+
+n_distinct(daily_activity$Id)
+n_distinct(sleep_day$Id)
+
+nrow(daily_activity)
+nrow(sleep_day)
+
+# For the daily activity dataframe:
+daily_activity %>%  
+  select(TotalSteps,
+         TotalDistance,
+         SedentaryMinutes) %>%
+  summary()
+
+
+For the sleep dataframe:
+
+sleep_day %>%  
+  select(TotalSleepRecords,
+         TotalMinutesAsleep,
+         TotalTimeInBed) %>%
+  summary()
+ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes)) + geom_point()
+ggplot(data=sleep_day, aes(x=TotalMinutesAsleep, y=TotalTimeInBed)) + geom_point()
+
+setwd("/cloud/project")
+> library(readr)
+> dailyActivity_merged <- read_csv("fitbit/dailyActivity_merged.csv")
+Rows: 940 Columns: 15                                                                                           
+── Column specification ─────────────────────────────────────────────────────────  ──────────────────────────────
+Delimiter: ","
+chr  (1): ActivityDate
+dbl (14): Id, TotalSteps, TotalDistance, TrackerDistance, LoggedActivitiesDistance, VeryActiveDistance, Mode...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> View(dailyActivity_merged)
+> library(readr)
+> sleepDay_merged <- read_csv("fitbit/sleepDay_merged.csv")
+Rows: 413 Columns: 5                                                                                            
+── Column specification ────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SleepDay
+dbl (4): Id, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+> View(sleepDay_merged)
+> View(data)
+> head(daily_activity)
+Error: object 'daily_activity' not found
+> head(dailyactivity)
+Error: object 'dailyactivity' not found
+> head(dailyactivity_merged)
+Error: object 'dailyactivity_merged' not found
+> head(dailyactivity_merged.csv)
+Error: object 'dailyactivity_merged.csv' not found
+> head(dailyActivity_merged)
+# A tibble: 6 × 15
+          Id ActivityDate TotalSteps TotalDistance TrackerDistance LoggedActivitiesDistance VeryActiveDistance
+       <dbl> <chr>             <dbl>         <dbl>           <dbl>                    <dbl>              <dbl>
+1 1503960366 4/12/2016         13162          8.5             8.5                         0               1.88
+2 1503960366 4/13/2016         10735          6.97            6.97                        0               1.57
+3 1503960366 4/14/2016         10460          6.74            6.74                        0               2.44
+4 1503960366 4/15/2016          9762          6.28            6.28                        0               2.14
+5 1503960366 4/16/2016         12669          8.16            8.16                        0               2.71
+6 1503960366 4/17/2016          9705          6.48            6.48                        0               3.19
+# ℹ 8 more variables: ModeratelyActiveDistance <dbl>, LightActiveDistance <dbl>, SedentaryActiveDistance <dbl>,
+#   VeryActiveMinutes <dbl>, FairlyActiveMinutes <dbl>, LightlyActiveMinutes <dbl>, SedentaryMinutes <dbl>,
+#   Calories <dbl>
+> colnames(daily_activity)
+Error: object 'daily_activity' not found
+> colnames(dailyActivity_merged)
+ [1] "Id"                       "ActivityDate"             "TotalSteps"               "TotalDistance"           
+ [5] "TrackerDistance"          "LoggedActivitiesDistance" "VeryActiveDistance"       "ModeratelyActiveDistance"
+ [9] "LightActiveDistance"      "SedentaryActiveDistance"  "VeryActiveMinutes"        "FairlyActiveMinutes"     
+[13] "LightlyActiveMinutes"     "SedentaryMinutes"         "Calories"                
+> head(sleepDay_merged)
+# A tibble: 6 × 5
+          Id SleepDay              TotalSleepRecords TotalMinutesAsleep TotalTimeInBed
+       <dbl> <chr>                             <dbl>              <dbl>          <dbl>
+1 1503960366 4/12/2016 12:00:00 AM                 1                327            346
+2 1503960366 4/13/2016 12:00:00 AM                 2                384            407
+3 1503960366 4/15/2016 12:00:00 AM                 1                412            442
+4 1503960366 4/16/2016 12:00:00 AM                 2                340            367
+5 1503960366 4/17/2016 12:00:00 AM                 1                700            712
+6 1503960366 4/19/2016 12:00:00 AM                 1                304            320
+> colnames(sleepDay_merged)
+[1] "Id"                 "SleepDay"           "TotalSleepRecords"  "TotalMinutesAsleep" "TotalTimeInBed"    
+> > n_distinct(daily_activity$Id)
+Error: object 'daily_activity' not found
+> > n_distinct(dailyActivity_merged$Id)
+[1] 33
+> n_distinct(sleepDay_merged$Id)
+[1] 24
+> > nrow(dailyActivity_merged)
+[1] 940
+> nrow(sleepDay_merged)
+[1] 413
+> > dailyActivity_merged %>%  
++     select(TotalSteps,
++            TotalDistance,
++            SedentaryMinutes) %>%
++     summary()
+   TotalSteps    TotalDistance    SedentaryMinutes
+ Min.   :    0   Min.   : 0.000   Min.   :   0.0  
+ 1st Qu.: 3790   1st Qu.: 2.620   1st Qu.: 729.8  
+ Median : 7406   Median : 5.245   Median :1057.5  
+ Mean   : 7638   Mean   : 5.490   Mean   : 991.2  
+ 3rd Qu.:10727   3rd Qu.: 7.713   3rd Qu.:1229.5  
+ Max.   :36019   Max.   :28.030   Max.   :1440.0  
+> > sleepDay_merged %>%  
++     select(TotalSleepRecords,
++            TotalMinutesAsleep,
++            TotalTimeInBed) %>%
++     summary()
+ TotalSleepRecords TotalMinutesAsleep TotalTimeInBed 
+ Min.   :1.000     Min.   : 58.0      Min.   : 61.0  
+ 1st Qu.:1.000     1st Qu.:361.0      1st Qu.:403.0  
+ Median :1.000     Median :433.0      Median :463.0  
+ Mean   :1.119     Mean   :419.5      Mean   :458.6  
+ 3rd Qu.:1.000     3rd Qu.:490.0      3rd Qu.:526.0  
+ Max.   :3.000     Max.   :796.0      Max.   :961.0  
+> > ggplot(data=dailyActivity_merged, aes(x=TotalSteps, y=SedentaryMinutes)) + geom_point()
+> > ggplot(data=sleepDay_merged, aes(x=TotalMinutesAsleep, y=TotalTimeInBed)) + geom_point()
+> > View(dailyActivity_merged)
+> View(sleepDay_merged)
+> combined_data <- merge(sleepDay_merged, dailyActivity_merged, by="Id")
+> > View(combined_data)
+> n_distinct(combined_data$Id)
+[1] 24
+> save.image("/cloud/project/fitbit/dailyActivity_merged.csv.RData")
+Session restored from your saved work on 2024-Oct-17 17:33:29 UTC (13 minutes ago)
+
